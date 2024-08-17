@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase History</title>
+    <style>
+        /* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+main {
+    padding: 20px;
+}
+
+#purchase-history {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.purchase {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.purchase:last-child {
+    border-bottom: none;
+}
+
+.purchase h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.purchase p {
+    margin: 5px 0;
+}
+
+.purchase ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.purchase li {
+    margin-bottom: 5px;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Purchase History</h1>
+    </header>
+    <main>
+        <div id="purchase-history">
+            <!-- Purchase history will be injected here -->
+        </div>
+    </main>
+    <script>
+        // scripts.js
+document.addEventListener('DOMContentLoaded', function() {
+    // Simulating an API call to fetch purchase history
+    fetch('/api/purchase-history') // Replace with your actual API endpoint
+        .then(response => response.json())
+        .then(data => {
+            const historyContainer = document.getElementById('purchase-history');
+            data.forEach(purchase => {
+                const purchaseElement = document.createElement('div');
+                purchaseElement.className = 'purchase';
+                purchaseElement.innerHTML = `
+                    <h2>Purchase ID: ${purchase.purchase_id}</h2>
+                    <p>Date: ${new Date(purchase.purchase_date).toLocaleDateString()}</p>
+                    <p>Total Amount: $${purchase.total_amount.toFixed(2)}</p>
+                    <ul>
+                        ${purchase.items.map(item => `
+                            <li>${item.product_name} - ${item.quantity} @ $${item.price_per_unit.toFixed(2)} each</li>
+                        `).join('')}
+                    </ul>
+                `;
+                historyContainer.appendChild(purchaseElement);
+            });
+        })
+        .catch(error => console.error('Error fetching purchase history:', error));
+});
+
+    </script>
+</body>
+</html>
+

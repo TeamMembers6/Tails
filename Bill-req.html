@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Request - Tile & Sanitary E-commerce</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: #0A0A0A;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .menu ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .menu ul li {
+            margin: 0 15px;
+        }
+
+        .menu ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .menu ul li a i {
+            margin-right: 5px;
+        }
+
+        .logo a {
+            color: white;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Main Section Styling */
+        main {
+            padding: 20px;
+        }
+        .menu-toggle {
+            display: block; /* Show the menu toggle button on small screens */
+        }
+
+        .bill-section {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        .bill-section h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .bill-details {
+            border-top: 1px solid #e2e7e6;
+            padding-top: 20px;
+        }
+
+        .bill-item {
+            border-bottom: 1px solid #e2e7e6;
+            padding: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .bill-item:last-child {
+            border-bottom: none;
+        }
+
+        .bill-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 20px;
+        }
+
+        .bill-item-details {
+            flex-grow: 1;
+        }
+
+        .bill-item h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .bill-item p {
+            margin: 5px 0;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .bill-summary {
+            border-top: 1px solid #e2e7e6;
+            padding-top: 20px;
+            text-align: right;
+        }
+
+        .bill-summary p {
+            font-size: 1.25rem;
+            margin: 5px 0;
+            color: #333;
+        }
+
+        .bill-summary span {
+            font-weight: bold;
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #0A0A0A;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h2>TileSanitary</h2>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="index.html">  <i class="fa-solid fa-house"></i> Home </a></li>
+                    <li><a href="SlabTiles.html">Tiles</a></li>
+                    <li><a href="sanitary.html">Sanitary</a></li>
+                    <li><a href="contact.html">  <i class="fa-solid fa-phone"></i>  Contact Us</a></li>
+                    <li><a href="cart.html" class="cart"><i class="fa-solid fa-cart-shopping"></i> Cart </a></li>
+                </ul>
+            </div>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                ☰
+            </div>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="bill-section">
+            <h1>Your Bill</h1>
+            <div class="bill-details" id="bill-details">
+                <!-- Bill details will be dynamically inserted here -->
+            </div>
+            <div class="bill-summary">
+                <p>Total Items: <span id="total-items">0</span></p>
+                <p>Total Price: ₹<span id="total-price">0</span></p>
+                <p>Date: <span id="bill-date"></span></p>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="foot-panel1">
+            Back to top
+        </div>
+        <div class="footer-content">
+            <p>© 2024 TileSanitary</p>
+        </div>
+    </footer>
+
+    <script>
+        // Function to load bill data from localStorage and display it
+        function loadBillData() {
+            const billData = JSON.parse(localStorage.getItem('billData'));
+
+            if (!billData) {
+                document.querySelector('.bill-details').innerHTML = '<p>No bill data found.</p>';
+                return;
+            }
+
+            const billDetailsDiv = document.getElementById('bill-details');
+            const totalItems = document.getElementById('total-items');
+            const totalPrice = document.getElementById('total-price');
+            const billDate = document.getElementById('bill-date');
+
+            billDetailsDiv.innerHTML = ''; // Clear existing items
+
+            billData.items.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'bill-item';
+                itemDiv.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="bill-item-details">
+                        <h3>${item.name}</h3>
+                        <p>Price: ₹${item.price}</p>
+                        <p>Quantity: ${item.quantity}</p>
+                    </div>
+                `;
+                billDetailsDiv.appendChild(itemDiv);
+            });
+
+            totalItems.textContent = billData.totalItems;
+            totalPrice.textContent = billData.totalPrice;
+            billDate.textContent = new Date(billData.timestamp).toLocaleString();
+        }
+
+        function toggleMenu() {
+            const menu = document.querySelector('.menu ul');
+            menu.classList.toggle('active');
+        }
+
+        // Load bill data when page loads
+        document.addEventListener('DOMContentLoaded', loadBillData);
+    </script>
+</body>
+</html>
