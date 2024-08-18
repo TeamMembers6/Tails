@@ -512,12 +512,17 @@
         });
 
         window.addEventListener('load', () => {
+            
             if (localStorage.getItem('userLogin')){
                 let logVal = document.getElementById('login')
                 logVal.innerHTML=`<span class='logout'>Logout</span>`;
-                logVal.addEventListener('click',()=>{
+                document.querySelector('.logout').addEventListener('click',()=>{
                     if (confirm('Do you want logout this account')){
+                        
+                        localStorage.setItem('userLogin',false)
+                        
                         localStorage.clear();
+                        logVal.innerHTML=` <li id="login"><a href="login.html">Login</a></li>`
                     }
 
                 })
