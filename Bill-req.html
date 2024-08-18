@@ -65,7 +65,7 @@
             padding: 20px;
         }
         .menu-toggle {
-            display: block; /* Show the menu toggle button on small screens */
+            display: none; /* Show the menu toggle button on small screens */
         }
 
         .bill-section {
@@ -147,6 +147,31 @@
             padding: 20px;
             text-align: center;
         }
+          @media (max-width: 768px) {
+            .menu {
+                display: none;       
+               flex-direction: column;
+                width: 40%;
+                background-color: #333;
+                position: absolute;
+                top: 88px;
+                right:0px;
+              padding-left:20px;
+            }
+            .menu ul {
+                flex-direction: column;
+             }
+          .menu ul li {
+            padding:10px 0;
+          }
+            .menu-toggle {
+                display: block;
+            } 
+           .menu.active{
+            display:block;
+          }
+
+          }
     </style>
 </head>
 <body>
@@ -230,8 +255,9 @@
         }
 
         function toggleMenu() {
-            const menu = document.querySelector('.menu ul');
+            const menu = document.querySelector('.menu');
             menu.classList.toggle('active');
+          console.log("hello")
         }
 
         // Load bill data when page loads

@@ -247,11 +247,11 @@
             .show {
                 display: block;
                 flex-direction: column;
-                width: 25%;
+                width: 40%;
                 position: absolute;
                 top: 87px;
                 right: 0;
-                padding-left: 30px;
+                padding-left: 20px;
                 
             }
 
@@ -264,7 +264,7 @@
 
             .menu ul li {
                 padding: 8px;
-                float: left;
+          
             }
 
             .menu ul {
@@ -376,7 +376,7 @@
             
 
             try {
-                const response =await fetch('http://localhost:3000/request-status', {
+                const response =await fetch('http://localhost:4000/request-status', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
