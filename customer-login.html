@@ -67,7 +67,13 @@
             color: #fff;
             cursor: pointer;
         }
-
+        .change-password .cpass{
+            cursor: pointer;
+            margin:10px 0;
+            color:red;
+            font-family: Arial;
+        }
+        
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -119,7 +125,7 @@
             margin-bottom: 15px;
         }
 
-        .signup-container .btn {
+         .btn {
             width: 100%;
         }
 
@@ -140,7 +146,11 @@
             text-align: center;
             margin-top: 10px;
         }
-
+        #change-password-form{
+            padding: 50px;
+            border-radius: 10px;
+            background-color: #cdbbbb4c;
+        }
         .invalid-feedback {
             display: block;
             color: red;
@@ -156,10 +166,10 @@
                 <a href="#">TileSanitary</a>
             </div>
             <ul class="nav-links">
-                <li><a href="#">Home</a></li>
+                <li><a href="customer-index.html">Home</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="customer-contact.html">Contact</a></li>
             </ul>
             <div class="menu-toggle" id="menu-toggle">
                 &#9776;
@@ -184,32 +194,147 @@
                     </div>
                     <div class="invalid-feedback" id="password-error"></div>
                 </div>
+                <div class="change-password">
+                    <span class="cpass" onclick="showChangePassword()">Change Password</span>
+                </div>
                 <button type="submit" class="btn btn-primary">Sign In</button>
             </form>
-            <a href="signup.html" class="login-link">Don't have an account? Register</a>
+            
+            <a href="customer-signup.html" class="login-link">Don't have an account? Register</a>
+        </div>
+        <div id="change-password-form" style="display: none;">
+            <h3 class="text-center text-secondary">Change Password</h3>
+            <form id="change-password" novalidate>
+                <div class="mb-3">
+                    <label for="current-password" class="form-label">Current Password:</label>
+                    <div class="password">
+                        <input type="password" class="form-control" id="current-password" required />
+                        <i class="fa-solid fa-eye" onclick="togglePasswordVisibility(this)" style="display: none;"></i>
+                        <i class="fa-solid fa-eye-slash" onclick="togglePasswordVisibility(this)" ></i>    
+                    </div>
+                    <div class="invalid-feedback" id="current-password-error"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="new-password" class="form-label">New Password:</label>
+                    <div class="password">
+                        <input type="password" class="form-control" id="new-password" required minlength="8" />
+                    <i class="fa-solid fa-eye" onclick="togglePasswordVisibility(this)" style="display: none;"></i>
+                    <i class="fa-solid fa-eye-slash" onclick="togglePasswordVisibility(this)" ></i>
+                    </div>
+                    <div class="invalid-feedback" id="new-password-error"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="confirm-password" class="form-label">Confirm New Password:</label>
+                    <div class="password">
+                        <input type="password" class="form-control" id="confirm-password" required minlength="8" />
+                    <i class="fa-solid fa-eye" onclick="togglePasswordVisibility(this)" style="display: none;"></i>
+                    <i class="fa-solid fa-eye-slash" onclick="togglePasswordVisibility(this)" ></i>
+
+                    </div>
+                    <div class="invalid-feedback" id="confirm-password-error"></div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         </div>
     </div>
 
     <script>
+        function showChangePassword() {
+            document.querySelector('.signup-container').style.display='none';
+            document.getElementById('change-password-form').style.display = 'block';
+        }
+        document.getElementById('change-password').addEventListener('submit', function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+            
+    let form = this;
+    let currentPassword = document.getElementById('current-password');
+    let newPassword = document.getElementById('new-password');
+    let confirmPassword = document.getElementById('confirm-password');
+    let currentPasswordError = document.getElementById('current-password-error');
+    let newPasswordError = document.getElementById('new-password-error');
+    let confirmPasswordError = document.getElementById('confirm-password-error');
+            console.log(currentPassword.value,newPassword.value);
+            
+    // Clear previous errors
+    currentPasswordError.textContent = '';
+    newPasswordError.textContent = '';
+    confirmPasswordError.textContent = '';
+
+    // Validate form fields
+    let valid = true;
+
+    if (!currentPassword.checkValidity()) {
+        currentPasswordError.textContent = 'Current password is required.';
+        valid = false;
+    }
+
+    if (!newPassword.checkValidity()) {
+        newPasswordError.textContent = 'New password must be at least 8 characters long.';
+        valid = false;
+    }
+
+    if (newPassword.value !== confirmPassword.value) {
+        confirmPasswordError.textContent = 'Passwords do not match.';
+        valid = false;
+    }
+
+    if (valid) {
+        // Send change password request to backend
+        fetch('http://localhost:4000/change-password', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                email: localStorage.getItem('email'), // Ensure this key matches the key set during login
+                currentPassword: currentPassword.value,
+                newPassword: newPassword.value
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message === 'Password changed successfully') {
+                alert('Password changed successfully!');
+                window.location.href='customer-index.html';
+                currentPassword.value = '';
+                newPassword.value = '';
+                confirmPassword.value = '';
+                document.getElementById('change-password-form').style.display = 'none';
+            } else {
+                if (data.error === 'Incorrect current password') {
+                    currentPasswordError.textContent = 'Incorrect current password.';
+                } else if (data.error === 'Password change failed') {
+                    alert('Failed to change password. Please try again.');
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+        });
+    } else {
+        form.classList.add('was-validated');
+    }
+});
+
         document.getElementById('menu-toggle').addEventListener('click', function() {
             document.querySelector('.nav-links').classList.toggle('active');
         });
 
         function togglePasswordVisibility(icon) {
-            const passwordInput = document.getElementById('password');
-            const eyeIcon = icon.parentElement.querySelector('.fa-eye');
-            const eyeSlashIcon = icon.parentElement.querySelector('.fa-eye-slash');
+    const passwordInput = icon.parentElement.querySelector('input');
+    const eyeIcon = icon.parentElement.querySelector('.fa-eye');
+    const eyeSlashIcon = icon.parentElement.querySelector('.fa-eye-slash');
 
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                eyeIcon.style.display = 'inline';
-                eyeSlashIcon.style.display = 'none';
-            } else {
-                passwordInput.type = 'password';
-                eyeIcon.style.display = 'none';
-                eyeSlashIcon.style.display = 'inline';
-            }
-        }
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        eyeIcon.style.display = 'inline';
+        eyeSlashIcon.style.display = 'none';
+    } else {
+        passwordInput.type = 'password';
+        eyeIcon.style.display = 'none';
+        eyeSlashIcon.style.display = 'inline';
+    }
+}
 
         document.getElementById('login-form').addEventListener('submit', function(event) {
             event.preventDefault();
@@ -253,7 +378,7 @@
                         localStorage.setItem('userLogin',true)
                         password.value=''
                         email.value=''
-                        window.location.href = 'index.html'; // Redirect to user interface or dashboard
+                        window.location.href = 'customer-index.html'; // Redirect to user interface or dashboard
                     } else {
                         if (data.error === 'Invalid email') {
                             emailError.textContent = 'Invalid email address.';

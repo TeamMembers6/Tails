@@ -307,11 +307,11 @@
             </div>
             <div class="menu" id="mobile-nav">
                 <ul>
-                    <li><a href="index.html"> <i class="fa-solid fa-house"></i> Home </a></li>
-                    <li><a href="SlabTiles.html">Tiles</a></li>
-                    <li><a href="sanitary.html">Sanitary</a></li>
-                    <li><a href="contact.html"> <i class="fa-solid fa-phone"></i> Contact Us</a></li>
-                    <li><a href="cart.html" class="cart"><i class="fa-solid fa-cart-shopping"></i> Cart </a></li>
+                    <li><a href="customer-index.html"> <i class="fa-solid fa-house"></i> Home </a></li>
+                    <li><a href="Customer-SlabTiles.html">Tiles</a></li>
+                    <li><a href="customer-sanitary.html">Sanitary</a></li>
+                    <li><a href="customer-contact.html"> <i class="fa-solid fa-phone"></i> Contact</a></li>
+                    <li><a href="customer-cart.html" class="cart"><i class="fa-solid fa-cart-shopping"></i> Cart </a></li>
                 </ul>
             </div>
             <span class="menu-toggle" onclick="toggleMenu()">☰</span>
@@ -323,9 +323,11 @@
         <section class="cart-section">
             <h1>Your Cart</h1>
             <div class="cart-items" id="cart-items">
+                <h1>Your cart is Empty</h1>
                 <!-- Cart items will be dynamically inserted here -->
             </div>
             <div class="cart-summary">
+
                 <p>Total Items: <span id="total-items">0</span></p>
                 <p>Total Price: ₹<span id="total-price">0</span></p>
             </div>
@@ -345,7 +347,7 @@
     <script>
        async function generateAndSendBill() {
             if (!localStorage.getItem('userLogin'))
-                return window.location.href = 'login.html'
+                return window.location.href = 'customer-login.html'
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             if (cart.length === 0) {
                 alert('Your cart is empty.');
@@ -354,25 +356,22 @@
 
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
             const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
-            const billData = {
-                items: cart,
-                totalItems: totalItems,
-                totalPrice: totalPrice,
-                timestamp: new Date().toISOString()
-            };
+            
+            
+            
             
             let email =  localStorage.getItem('email')
-            Adata =[]
-            cart.forEach((item, index) => {
-               Adata.push({ tname:item.name,Price:item.price,quantity:item.quantity,image:item.image})
-            })
+            
+            
             const data = {
                 email:email,
-                data: Adata
-                
+                item:cart,
+                status:'Pending',
+                totalItems: totalItems,
+                totalPrice: totalPrice,
+                timestamp: new Date().toLocaleString()
             };
-            console.log(data);
+           
             
 
             try {
@@ -394,13 +393,6 @@
                 console.error('Error:', error);
                 document.getElementById('message').textContent = 'An error occurred: ' + error.message;
             }
-
-            // Convert billData to a JSON string
-            const billJson = JSON.stringify(billData);
-
-            // Save bill data in localStorage
-            localStorage.setItem('billData', billJson);
-
 
             // Clear cart after saving the bill
             localStorage.removeItem('cart');
