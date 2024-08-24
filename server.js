@@ -13,14 +13,10 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/students',{
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    connectTimeoutMS: 20000, // Increase timeout to 20 seconds
-}).then(() => {
+mongoose.connect('mongodb://localhost:27017/students').then(() => {
   console.log('Connected to MongoDB!');
 }).catch(err => {
-  console.error('Error connecting to MongoDB:', err);
+  console.error('Error connecting to MongoDB:', err.message);
 });
 
 // Route to handle user registration
