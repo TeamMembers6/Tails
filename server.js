@@ -231,7 +231,7 @@ app.post('/change-password', async (req, res) => {
           return res.status(404).json({ error: 'User not found' });
       }
 
-      // Check if current password matches
+      // Check if current password matches 
       if (user.password !== currentPassword) {
           return res.status(400).json({ error: 'Incorrect current password' });
       }
