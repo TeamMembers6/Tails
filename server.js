@@ -11,9 +11,9 @@ const app = express();
 // Middleware
 app.use(bodyParser.json());
 app.use(cors());
-
+let data="students"
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/students').then(() => {
+mongoose.connect(`mongodb://localhost:27017/${data}`).then(() => {
   console.log('Connected to MongoDB!');
 }).catch(err => {
   console.error('Error connecting to MongoDB:', err.message);
