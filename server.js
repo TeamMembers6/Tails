@@ -304,8 +304,3 @@ app.post('/change-password', async (req, res) => {
 
 app.listen(4000, () => {
   console.log(`Server is running on http://localhost:4000`);
-<<<<<<< HEAD
-});
-=======
-});
->>>>>>> ecd0562752d7844b33e48da3447256a8ffa34cc1
