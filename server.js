@@ -6,6 +6,7 @@ const cors = require('cors');
 const User = require('./models/User'); // Import the User model
 const MainModel = require('./models/Request'); // Import the User model
 const Bill = require('./models/bill');
+const company = require('./models/company')
 const app = express();
 
 
@@ -50,6 +51,33 @@ app.get("/", (req, res) => {
   res.send("hello")
 })
 // Route to handle user login
+app.post('/company-login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // Find the user by email
+    const user = await company.findOne({ email });
+
+
+
+
+    // Check if the email exists
+    if (!user) {
+      return res.status(400).json({ error: 'Invalid email' });
+    }
+
+    // Check if the provided password matches the stored password
+    if (user.password !== password) {
+      return res.status(400).json({ error: 'Invalid password' });
+    }
+
+    // If the credentials are correct
+    res.status(200).json({ message: 'Login successful' });
+  } catch (err) {
+    console.error('Error:', err);
+    res.status(500).json({ error: 'An error occurred during login.' });
+  }
+});
 app.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -221,6 +249,32 @@ app.get('/bills/:id', async (req, res) => {
   }
 });
 
+app.post('/company-change-password', async (req, res) => {
+  const { email, currentPassword, newPassword } = req.body;
+
+  try {
+      // Find user by email
+      const user = await company.findOne({ email: email });
+
+      if (!user) {
+          return res.status(404).json({ error: 'User not found' });
+      }
+
+      // Check if current password matches 
+      if (user.password !== currentPassword) {
+          return res.status(400).json({ error: 'Incorrect current password' });
+      }
+
+      // Update user password
+      user.password = newPassword;
+      await user.save();
+
+      res.json({ message: 'Password changed successfully' });
+  } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Server error' });
+  }
+});
 app.post('/change-password', async (req, res) => {
   const { email, currentPassword, newPassword } = req.body;
 
