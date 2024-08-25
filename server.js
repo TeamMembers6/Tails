@@ -6,7 +6,7 @@ const cors = require('cors');
 const User = require('./models/User'); // Import the User model
 const MainModel = require('./models/Request'); // Import the User model
 const Bill = require('./models/bill');
-const company = require('./models/company')
+const Company = require('./models/company');
 const app = express();
 
 
@@ -53,31 +53,27 @@ app.get("/", (req, res) => {
 // Route to handle user login
 app.post('/company-login', async (req, res) => {
   try {
-    const { email, password } = req.body;
-
     // Find the user by email
-    const user = await company.findOne({ email });
-
-
-
+    const admin = await Company.findOne({ email: req.body.email });
 
     // Check if the email exists
-    if (!user) {
+    if (!admin) {
       return res.status(400).json({ error: 'Invalid email' });
     }
 
     // Check if the provided password matches the stored password
-    if (user.password !== password) {
+    if (admin.password !== req.body.password) {
       return res.status(400).json({ error: 'Invalid password' });
     }
 
     // If the credentials are correct
     res.status(200).json({ message: 'Login successful' });
   } catch (err) {
-    console.error('Error:', err);
+    console.error('Error:', err); // Log error for debugging
     res.status(500).json({ error: 'An error occurred during login.' });
   }
 });
+
 app.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
