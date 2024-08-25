@@ -6,7 +6,7 @@ const cors = require('cors');
 const User = require('./models/User'); // Import the User model
 const MainModel = require('./models/Request'); // Import the User model
 const Bill = require('./models/bill');
-const Company = require('./models/company');
+
 const app = express();
 
 
@@ -51,10 +51,12 @@ app.get("/", (req, res) => {
   res.send("hello")
 })
 // Route to handle user login
+// Adjust path as necessary
+let company = require("./models/company")
 app.post('/company-login', async (req, res) => {
   try {
     // Find the user by email
-    const admin = await Company.findOne({ email: req.body.email });
+    const admin = await company.findOne({ email: req.body.email });
 
     // Check if the email exists
     if (!admin) {
@@ -73,6 +75,7 @@ app.post('/company-login', async (req, res) => {
     res.status(500).json({ error: 'An error occurred during login.' });
   }
 });
+
 
 app.post('/login', async (req, res) => {
   try {
@@ -299,4 +302,5 @@ app.post('/change-password', async (req, res) => {
 });
 
 app.listen(4000, () => {
-  console.log(`Server is running on http://localhost:4000`);
+  console.log(`Server is running on http://localhost:4000`)
+})
