@@ -118,7 +118,7 @@
 
     
         function displayBillData(billData) {
-            console.log(billData);
+           
             
             const billDetailsDiv = document.getElementById('bill-details');
             let billno=generateRandomBillNumber()
@@ -187,7 +187,7 @@
                     return response.json();
                 })
                 .then(data => {
-                    console.log('Bill stored successfully:');
+                    alert('Bill stored successfully:');
                 })
                 .catch(error => {
                     console.error('There was a problem with the fetch operation:', error.message);

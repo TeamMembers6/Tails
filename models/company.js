@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 // Define the user schema
-const userSchema = new mongoose.Schema({
+const companySchema = new mongoose.Schema({
   name: {
     type: String,
     required: true
@@ -26,7 +26,4 @@ const userSchema = new mongoose.Schema({
   }
 });
 // Create a model using the schema
-const User = mongoose.model('User', userSchema);
-
-// Export the model
-module.exports = User;
+const company = mongoose.model('Company', companySchema);

@@ -126,7 +126,7 @@
             <div class="nav-container">
                 <a href="index.html" class="nav-link">Home</a>
                 <a href="contact.html" class="nav-link">Contact</a>
-                <a href="previous-page.html" class="nav-link" onclick="window.history.back();">Back</a>
+                <a  class="nav-link" onclick="window.history.back();">Back</a>
             </div>
         </nav>
         <h1>Bill History</h1>
@@ -187,19 +187,19 @@
             let totalBills = 0;
             let totalAmount = 0;
             
+            // console.log(data);
             
             if (data.length===0){
-                document.querySelector('table').innerHTML=`<p>No bills are found</p>`
+                billTableBody.innerHTML=`<p>No bills are found</p>`
                 totalBillsSpan.textContent = totalBills;
                 totalAmountSpan.textContent = totalAmount.toFixed(2);
             
                 return 
             }
             data.forEach(bill => {
-                const billDate = bill.date; // Assuming bill.date is in dd-mm-yyyy format
-                 // Convert user date to dd-mm-yyyy format
-
-             
+                
+                
+               
                     const row = document.createElement('tr');
                     row.innerHTML = `
                         <td>${bill.name}</td>
@@ -207,6 +207,7 @@
                         <td>${bill.totalitems}</td>
                         <td>${bill.totalprice}</td>
                     `;
+                   
                     billTableBody.appendChild(row);
                     totalBills++;
                     totalAmount += bill.totalprice; // Assuming bill.totalPrice is in correct format
