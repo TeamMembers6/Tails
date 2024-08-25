@@ -56,7 +56,7 @@ let company = require("./models/company")
 app.post('/company-login', async (req, res) => {
   try {
     // Find the user by email
-    const admin = await company.findOne({ email: req.body.email });
+    const admin = await company.findOne({email });
 
     // Check if the email exists
     if (!admin) {
