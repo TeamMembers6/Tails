@@ -347,6 +347,7 @@
 
     <script>
         async function generateAndSendBill() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
             if (cart.length === 0) {
                 alert('Your cart is empty.');
                 return;
@@ -354,7 +355,7 @@
 
             if (!localStorage.getItem('userLogin'))
                 return window.location.href = 'customer-login.html'
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
 
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
             const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
