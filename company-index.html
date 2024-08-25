@@ -550,7 +550,7 @@
         });
         document.addEventListener('DOMContentLoaded', async () => {
             // Simulate whether there are pending requests
-            let response = await fetch("http://localhost:4000/bill-req");
+            let response = await fetch("https://tails-server-07zx.onrender.com/bill-req");
             let billData = await response.json();
 
 

@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/students').then(() => {
+mongoose.connect('mongodb+srv://mongodb:yash%40143@cluster0.mpfjl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0').then(() => {
   console.log('Connected to MongoDB!');
 }).catch(err => {
   console.error('Error connecting to MongoDB:', err);

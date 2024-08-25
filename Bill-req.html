@@ -320,7 +320,7 @@
             try {
 
 
-                let response = await fetch("http://localhost:4000/bill-req");
+                let response = await fetch("https://tails-server-07zx.onrender.com/bill-req");
                 let billData = await response.json();
 
                 if (!billData) {
@@ -375,7 +375,7 @@
             }
         }
         function verify(email, status, timestamp) {
-    return fetch('http://localhost:4000/confirm', {
+    return fetch('https://tails-server-07zx.onrender.com/confirm', {
         method: 'PUT', // or 'PATCH' for partial updates
         headers: {
             'Content-Type': 'application/json'

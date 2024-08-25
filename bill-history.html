@@ -181,7 +181,7 @@
     async function displayBills(date) {
         try {
             const convertedDate = convertDateFormat(date);
-            let response = await fetch(`http://localhost:4000/bills/${convertedDate}`); // Adjust URL if needed
+            let response = await fetch(`https://tails-server-07zx.onrender.com/bills/${convertedDate}`); // Adjust URL if needed
             let data = await response.json();
             billTableBody.innerHTML = ''; // Clear previous content
             let totalBills = 0;

@@ -281,7 +281,7 @@
 
     if (valid) {
         // Send change password request to backend
-        fetch('http://localhost:4000/change-password', {
+        fetch('https://tails-server-07zx.onrender.com/change-password', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -365,7 +365,7 @@
 
             if (valid) {
                 // Send login request to backend
-                fetch('http://localhost:4000/login', { // Adjust the URL if needed
+                fetch('https://tails-server-07zx.onrender.com/login', { // Adjust the URL if needed
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: email.value, password: password.value })

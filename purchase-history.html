@@ -76,7 +76,7 @@ main {
         // scripts.js
 document.addEventListener('DOMContentLoaded', function() {
     // Simulating an API call to fetch purchase history
-    fetch('/api/purchase-history') // Replace with your actual API endpoint
+    fetch('https://tails-server-07zx.onrender.com/api/purchase-history') // Replace with your actual API endpoint
         .then(response => response.json())
         .then(data => {
             const historyContainer = document.getElementById('purchase-history');

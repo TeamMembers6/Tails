@@ -265,7 +265,7 @@
             }
 
             // Send data to the server
-            fetch('http://localhost:4000/submit-form', {
+            fetch('https://tails-server-07zx.onrender.com/submit-form', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -293,7 +293,7 @@
                     }
                 } else {
                     alert('Registration is successful, please login.');
-                    window.location.href = 'login.html';
+                    window.location.href = 'customer-login.html';
                 }
             })
             .catch(err => {

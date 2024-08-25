@@ -86,7 +86,7 @@
 
             if (billId) {
                 // Construct the URL for the fetch request
-                const apiUrl = `http://localhost:4000/bill-req/${billId}`;
+                const apiUrl = `https://tails-server-07zx.onrender.com/bill-req/${billId}`;
 
                 // Fetch data from the backend
                 fetch(apiUrl)
@@ -163,7 +163,7 @@
                     <td>Rs: ${totalAmount}</td>
                 </tr>
             </tbody></table>`;
-            fetch('http://localhost:4000/bills', {
+            fetch('https://tails-server-07zx.onrender.com/bills', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
