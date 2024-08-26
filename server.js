@@ -57,15 +57,15 @@ app.post('/company-login', async (req, res) => {
   try {
     const { email, password } = req.body;
     // Find the user by email
-    const admin = await company.findOne({email });
+    const admin = await company.find({ email: email }, { password: 1 });
 
     // Check if the email exists
-    if (!admin) {
+    if (admin.length === 0) {
       return res.status(400).json({ error: 'Invalid email' });
     }
 
     // Check if the provided password matches the stored password
-    if (admin.password !== req.body.password) {
+    if (admin[0].password !== req.body.password) {
       return res.status(400).json({ error: 'Invalid password' });
     }
 
