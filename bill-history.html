@@ -124,8 +124,8 @@
     <header>
         <nav>
             <div class="nav-container">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="company-index.html" class="nav-link">Home</a>
+                
                 <a  class="nav-link" onclick="window.history.back();">Back</a>
             </div>
         </nav>
@@ -141,14 +141,7 @@
                     <button id="filter-button">Filter</button>
                 </div>
                 <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Mobile</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
-                        </tr>
-                    </thead>
+                    
                     <tbody id="bill-table-body">
                         <!-- Bill rows will be inserted here by JavaScript -->
                     </tbody>
@@ -190,12 +183,22 @@
             // console.log(data);
             
             if (data.length===0){
-                billTableBody.innerHTML=`<p>No bills are found</p>`
+                document.querySelector('table').innerHTML=`<p>No bills are found</p>`
                 totalBillsSpan.textContent = totalBills;
                 totalAmountSpan.textContent = totalAmount.toFixed(2);
             
                 return 
             }
+            document.querySelector('table').innerHTML=`
+                <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Mobile</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    `
             data.forEach(bill => {
                 
                 
@@ -208,7 +211,7 @@
                         <td>${bill.totalprice}</td>
                     `;
                    
-                    billTableBody.appendChild(row);
+                    document.querySelector('table').appendChild(row);
                     totalBills++;
                     totalAmount += bill.totalprice; // Assuming bill.totalPrice is in correct format
                 
