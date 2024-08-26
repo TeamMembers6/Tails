@@ -1,6 +1,6 @@
 
 const mongoose = require('mongoose');
-const { DeviceSecretContextImpl } = require('twilio/lib/rest/microvisor/v1/device/deviceSecret');
+
 const itemSchema = new mongoose.Schema({
     description:{type:String},
     name: { type: String, required: true },
