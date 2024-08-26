@@ -362,10 +362,12 @@
                 })
                 .then(id => {
                     window.location.href = `bill-generate.html?id=${encodeURIComponent(id)}`;
-                    console.log('Granted request  successfully:');
-
+                    alert('Granted request  successfully:');
+                     loadCartItems();
+                    
                 })
                 .catch(error => {
+                    alert (error.message);
                     console.error('There was a problem with the fetch operation:', error);
                 });
 
