@@ -26,3 +26,5 @@ const itemSchema = new mongoose.Schema({
 // Create a model based on the schema
 const MainModel = mongoose.model('Requests', mainSchema);
 
+module.exports = MainModel;
+
