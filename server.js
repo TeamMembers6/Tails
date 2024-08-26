@@ -55,6 +55,7 @@ app.get("/", (req, res) => {
 let company = require("./models/company")
 app.post('/company-login', async (req, res) => {
   try {
+    const { email, password } = req.body;
     // Find the user by email
     const admin = await company.findOne({email });
 
