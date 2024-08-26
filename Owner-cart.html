@@ -295,7 +295,7 @@
 
     <script>
         function generateAndSendBill() {
-            const isLoggedIn = localStorage.getItem('ownerLogin') === 'true'; // Check if user is logged in
+            const isLoggedIn = localStorage.getItem('ownerLogin'); // Check if user is logged in
 
             if (!isLoggedIn) {
                 window.location.href = 'owner-login.html'; // Redirect to login page
