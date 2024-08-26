@@ -10,3 +10,4 @@ const companySchema = new mongoose.Schema({
 const Company = mongoose.model('Company', companySchema);
 
 // Use `Company` instead of `company`
+module.exports = Company;
