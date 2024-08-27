@@ -166,7 +166,7 @@
                 <a href="#">TileSanitary</a>
             </div>
             <ul class="nav-links">
-                <li><a href="company-index.html">Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Services</a></li>
               
@@ -373,9 +373,10 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.message === 'Login successful') {
+                       localStorage.setItem('email',email.value)
+                        localStorage.setItem('ownerLogin',true)
                         alert('Login successful! Redirecting...');
-                        localStorage.setItem('email',email.value)
-                        localStorage.setItem('userLogin',true)
+                        
                         password.value=''
                         email.value=''
                         window.location.href = 'company-index.html'; // Redirect to user interface or dashboard

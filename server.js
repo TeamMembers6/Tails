@@ -8,7 +8,7 @@ const MainModel = require('./models/Request'); // Import the User model
 const Bill = require('./models/bill');
 
 const app = express();
-console.log(MainModel.find());
+
 
 
 // Middleware
@@ -236,7 +236,7 @@ app.post('/bills', async (req, res) => {
 app.get('/bills/:id', async (req, res) => {
   try {
     let timestamp = req.params.id; // Trim any extra whitespace or newline characters
-    console.log(`Timestamp: ${timestamp}`);
+   
     
     // Query the database
     const bill = await Bill.find({date:timestamp }); // Use findOne to get a single document
