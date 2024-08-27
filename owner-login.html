@@ -381,6 +381,7 @@
                         window.location.href = 'company-index.html'; // Redirect to user interface or dashboard
                     } else {
                         if (data.error === 'Invalid email') {
+                           
                             emailError.textContent = 'Invalid email address.';
                         } else if (data.error === 'Invalid password') {
                             passwordError.textContent = 'Invalid password.';

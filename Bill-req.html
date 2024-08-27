@@ -322,7 +322,8 @@
 
                 let response = await fetch("https://tails-server-07zx.onrender.com/bill-req");
                 let billData = await response.json();
-
+                
+                
                 if (!billData) {
                     document.querySelector('.bill-details').innerHTML = '<p>No bill data found.</p>';
                     return;
@@ -333,6 +334,7 @@
 
                 billData.map(item => {
                     if (item.status === 'completed' || item.status === 'Rejected'){
+                        document.querySelector('.bill-details').innerHTML = '<p>No bill data found.</p>';
                         return      
                     }
                     const itemDiv = document.createElement('div');

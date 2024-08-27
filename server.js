@@ -6,8 +6,9 @@ const cors = require('cors');
 const User = require('./models/User'); // Import the User model
 const MainModel = require('./models/Request'); // Import the User model
 const Bill = require('./models/bill');
-const company = require('./models/company')
+
 const app = express();
+console.log(MainModel.find());
 
 
 // Middleware
@@ -20,6 +21,7 @@ mongoose.connect('mongodb+srv://mongodb:yash%40143@cluster0.mpfjl.mongodb.net/?r
 }).catch(err => {
   console.error('Error connecting to MongoDB:', err);
 });
+
 
 // Route to handle user registration
 app.post('/submit-form', async (req, res) => {
@@ -51,33 +53,34 @@ app.get("/", (req, res) => {
   res.send("hello")
 })
 // Route to handle user login
+// Adjust path as necessary
+let company = require("./models/company")
 app.post('/company-login', async (req, res) => {
   try {
-    const { email, password } = req.body;
-
+  
+    
     // Find the user by email
-    const user = await company.findOne({ email });
-
-
-
+    const admin = await company.find({ email: req.body.email });
 
     // Check if the email exists
-    if (!user) {
+    if (!admin) {
       return res.status(400).json({ error: 'Invalid email' });
     }
 
     // Check if the provided password matches the stored password
-    if (user.password !== password) {
+    if (admin.password !== req.body.password) {
       return res.status(400).json({ error: 'Invalid password' });
     }
 
     // If the credentials are correct
     res.status(200).json({ message: 'Login successful' });
   } catch (err) {
-    console.error('Error:', err);
+    console.error('Error:', err); // Log error for debugging
     res.status(500).json({ error: 'An error occurred during login.' });
   }
 });
+
+
 app.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -137,7 +140,8 @@ app.post('/request-status', async (req, res) => {
 });
 app.get('/bill-req', async (req, res) => {
   try {
-
+    
+    
     const users = await MainModel.find();
 
     if (users) {
@@ -302,10 +306,6 @@ app.post('/change-password', async (req, res) => {
   }
 });
 
-app.listen(4000, () => {
-  console.log(`Server is running on http://localhost:4000`);
-<<<<<<< HEAD
-});
-=======
-});
->>>>>>> ecd0562752d7844b33e48da3447256a8ffa34cc1
+app.listen(5000, () => {
+  console.log(`Server is running on http://localhost:4000`)
+})

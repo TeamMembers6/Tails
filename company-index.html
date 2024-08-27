@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="styles.css">
+   
     <style>
         body {
             margin: 0;
@@ -155,7 +155,7 @@
         }
 
         .box-img {
-            height: 200px;
+            height: 300px;
             background-size: cover;
             background-position: center;
             margin-bottom: 10px;
@@ -241,9 +241,36 @@
             display: inline-block;
             /* Show only when active */
         }
+        .box {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 10px;
+            width: 200px;
+          
+            text-align: center;
+        }
+
+        .box-img {
+            width: 100%;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .box-content {
+            padding: 10px;
+        }
+
+        #no-results {
+            text-align: center;
+            padding: 20px;
+            font-size: 1.2rem;
+            color: #ff0000;
+        }
 
         /* Responsive Styles */
-        @media (max-width: 768px) {
+        @media (max-width: 668px) {
             .menu {
                 display: none;
                 /* Initially hide the menu on mobile */
@@ -308,8 +335,8 @@
                 </ul>
             </div>
             <div class="search-bar">
-                <input type="text" placeholder="Search products...">
-                <button>Search</button>
+                <input type="text" id="search-input" placeholder="Search products...">
+                <button onclick="filterProducts()">Search</button>
             </div>
             <div class="menu-toggle" onclick="toggleMenu()">
                 ☰
@@ -319,165 +346,12 @@
 
     <div class="hero-section">
         <div class="hero-msg">
-            <p>You are on Tiles and sanitary store. Visit our Studio in NELLORE Santhapeta Oppt.to Vinayaka Hall</p>
+            <p class="px-2">You are on Tiles and sanitary store. Visit our Studio in NELLORE Santhapeta Oppt.to Vinayaka Hall</p>
         </div>
     </div>
 
-    <div class="shop-section">
-        <div class="heading1">
-            <h2>Tiles</h2>
-        </div>
-        <div class="box">
-            <div class="box-content">
-                <h2>Slab Tiles</h2>
-                <a href="owner-SlabTiles.html" class="box-link">
-                    <div class="box-img" style="background-image: url('Slab.jpg');"></div>
-                </a>
-                <a href="owner-SlabTiles.html">See more </a>
-            </div>
-        </div>
-        <div class="box">
-            <div class="box-content">
-                <h2>Elevation</h2>
-                <a href="owner-SlabTiles.html" class="box-link">
-                    <div class="box-img" style="background-image: url('Elevation.jpg');"></div>
-                </a>
-                <a href="owner-SlabTiles.html">See more </a>
-            </div>
-        </div>
-        <div class="box">
-            <div class="box-content">
-                <h2>Floor Tiles</h2>
-                <a href="owner-SlabTiles.html" class="box-link">
-                    <div class="box-img" style="background-image: url('Floor.jpg');"></div>
-                </a>
-                <a href="owner-SlabTiles.html">See more </a>
-            </div>
-        </div>
-        <div class="box">
-            <div class="box-content">
-                <h2>3D-Tiles</h2>
-                <a href="owner-SlabTiles.html" class="box-link">
-                    <div class="box-img" style="background-image: url('3DTiles.jpg');"></div>
-                </a>
-                <a href="owner-SlabTiles.html">See more </a>
-            </div>
-        </div>
-        <div class="box">
-            <div class="box-content">
-                <h2>CeramicWall-Tiles</h2>
-                <a href="owner-SlabTiles.html" class="box-link">
-                    <div class="box-img" style="background-image: url('Ceramicwall-Tiles.jpg');"></div>
-                </a>
-                <a href="owner-SlabTiles.html">See more </a>
-            </div>
-        </div>
-        <div class="box">
-            <div class="box-content">
-                <h2>WoodMats</h2>
-                <a href="owner-SlabTiles.html" class="box-link">
-                    <div class="box-img" style="background-image: url('Woodmat.jpg');"></div>
-                </a>
-                <a href="owner-SlabTiles.html">See more </a>
-            </div>
-        </div>
-        <div class="box">
-            <div class="box-content">
-                <h2>Parking Tiles</h2>
-                <a href="owner-SlabTiles.html" class="box-link">
-                    <div class="box-img" style="background-image: url('Parking.jpg');"></div>
-                </a>
-                <a href="owner-SlabTiles.html">See more </a>
-            </div>
-        </div>
-        <div class="box">
-            <div class="box-content">
-                <h2>Polished Tiles</h2>
-                <a href="owner-SlabTiles.html" class="box-link">
-                    <div class="box-img" style="background-image: url('Polished.jpg');"></div>
-                </a>
-                <a href="owner-SlabTiles.html">See more </a>
-            </div>
-        </div>
-        <!-- Repeat similar structure for other tiles categories -->
-    </div>
-    <div class="shop-section">
-        <div class="heading1">
-            <h2>Bathroom & Sanitary</h2>
-        </div>
-        <div class="box">
-            <div class="box-content">
-                <h2>WashBasins</h2>
-                <a href="owner-sanitary.html" class="box-link">
-                    <div class="box-img" style="background-image: url('Washbadin.jpg');"></div>
-                </a>
-                <a href="owner-sanitary.html">See more</a>
-            </div>
-        </div>
-        <div class="box">
-            <div class="box-content">
-                <h2>Urinals</h2>
-                <a href="owner-sanitary.html" class="box-link">
-                    <div class="box-img" style="background-image: url('Urinals.jpg');"></div>
-                </a>
-                <a href="owner-sanitary.html">See more</a>
-            </div>
-        </div>
-        <div class="box">
-            <div class="box-content">
-                <h2>WaterFall-Shower</h2>
-                <a href="owner-sanitary.html" class="box-link">
-                    <div class="box-img" style="background-image: url('Shower.jpg');"></div>
-                </a>
-                <a href="owner-sanitary.html">See more</a>
-            </div>
-        </div>
-        <div class="box">
-            <div class="box-content">
-                <h2>Kitchen-Sink</h2>
-                <a href="owner-sanitary.html" class="box-link">
-                    <div class="box-img" style="background-image: url('sink.jpg');"></div>
-                </a>
-                <a href="owner-sanitary.html">See more</a>
-            </div>
-        </div>
-        <div class="box">
-            <div class="box-content">
-                <h2>Bathtub</h2>
-                <a href="owner-sanitary.html" class="box-link">
-                    <div class="box-img" style="background-image: url('Bathtub.jpg');"></div>
-                </a>
-                <a href="owner-sanitary.html">See more</a>
-            </div>
-        </div>
-        <div class="box">
-            <div class="box-content">
-                <h2>Bathtub-Accessories</h2>
-                <a href="owner-sanitary.html" class="box-link">
-                    <div class="box-img" style="background-image: url('Bathtubacc.jpg');"></div>
-                </a>
-                <a href="owner-sanitary.html">See more</a>
-            </div>
-        </div>
-        <div class="box">
-            <div class="box-content">
-                <h2>Shower-Panels</h2>
-                <a href="owner-sanitary.html" class="box-link">
-                    <div class="box-img" style="background-image: url('Shower.jpg');"></div>
-                </a>
-                <a href="owner-sanitary.html">See more</a>
-            </div>
-        </div>
-        <div class="box">
-            <div class="box-content">
-                <h2>Water-Geyser</h2>
-                <a href="owner-sanitary.html" class="box-link">
-                    <div class="box-img" style="background-image: url('Geyser.jpg');"></div>
-                </a>
-                <a href="owner-sanitary.html">See more</a>
-            </div>
-        </div>
-    </div>
+    <div id="shop-container"></div>
+    <div id="no-results" style="display: none;">Products not found</div>
 
     <footer>
         <div class="foot-panel1" onclick="smoothScrollToTop()">
@@ -504,6 +378,7 @@
     </footer>
 
     <script>
+        document.querySelector('.foot-panel1').addEventListener('click', smoothScrollToTop);
         function toggleMenu() {
             const menu = document.querySelector('.menu');
             const menuToggle = document.querySelector('.menu-toggle');
@@ -522,10 +397,109 @@
                 behavior: 'smooth'
             });
         }
+        const shopData = [
+            {
+                title: 'Tiles',
+                categories: [
+                    { name: 'Slab Tiles', img: 'Slab.jpg', link: 'owner-SlabTiles.html' },
+                    { name: 'Elevation', img: 'Elevation.jpg', link: 'owner-SlabTiles.html' },
+                    { name: 'Floor Tiles', img: 'Floor.jpg', link: 'owner-SlabTiles.html' },
+                    { name: '3D-Tiles', img: '3DTiles.jpg', link: 'owner-SlabTiles.html' },
+                    { name: 'CeramicWall-Tiles', img: 'Ceramicwall-Tiles.jpg', link: 'owner-SlabTiles.html' },
+                    { name: 'WoodMats', img: 'Woodmat.jpg', link: 'owner-SlabTiles.html' },
+                    { name: 'Parking Tiles', img: 'Parking.jpg', link: 'owner-SlabTiles.html' },
+                    { name: 'Polished Tiles', img: 'Polished.jpg', link: 'owner-SlabTiles.html' }
+                ]
+            },
+            {
+                title: 'Bathroom & Sanitary',
+                categories: [
+                    { name: 'WashBasins', img: 'Washbadin.jpg', link: 'owner-sanitary.html' },
+                    { name: 'Urinals', img: 'Urinals.jpg', link: 'owner-sanitary.html' },
+                    { name: 'WaterFall-Shower', img: 'Shower.jpg', link: 'owner-sanitary.html' },
+                    { name: 'Kitchen-Sink', img: 'sink.jpg', link: 'owner-sanitary.html' },
+                    { name: 'Bathtub', img: 'Bathtub.jpg', link: 'owner-sanitary.html' },
+                    { name: 'Bathtub-Accessories', img: 'Bathtubacc.jpg', link: 'owner-sanitary.html' },
+                    { name: 'Shower-Panels', img: 'Shower.jpg', link: 'owner-sanitary.html' },
+                    { name: 'Water-Geyser', img: 'Geyser.jpg', link: 'owner-sanitary.html' }
+                ]
+            }
+        ];
 
-        document.querySelector('.foot-panel1').addEventListener('click', smoothScrollToTop);
+        // Function to generate HTML for a category
+        function createCategoryHTML(category) {
+            return `
+            <div class="box">
+                <div class="box-content">
+                    <h2>${category.name}</h2>
+                    <a href="${category.link}" class="box-link">
+                        <div class="box-img" style="background-image: url('${category.img}');"></div>
+                    </a>
+                    <a href="${category.link}">See more</a>
+                </div>
+            </div>
+        `;
+        }
 
-        window.addEventListener('resize', () => {
+        // Function to generate HTML for a shop section
+        function createSectionHTML(section) {
+            return `
+            <div class="shop-section">
+                <div class="heading1">
+                    <h2>${section.title}</h2>
+                </div>
+                ${section.categories.map(createCategoryHTML).join('')}
+            </div>
+        `;
+        }
+        
+        // Generate HTML and insert into the container
+ // Function to render shop data
+function renderShopData(data) {
+    const shopContainer = document.getElementById('shop-container');
+    shopContainer.innerHTML = data.map(createSectionHTML).join('');
+    document.getElementById('no-results').style.display = 'none'; // Hide no-results message
+}
+
+// Function to filter products
+// Function to filter products
+function filterProducts() {
+    const query = document.getElementById('search-input').value.trim().toLowerCase(); // Trim whitespace and convert to lowercase
+
+    // Check if the query is empty
+    if (query === '') {
+        // Show all products if query is empty
+        renderShopData(shopData);
+        document.getElementById('no-results').style.display = 'none'; // Hide no-results message
+    } else {
+        // Filter products based on query
+        let filteredData = shopData.map(section => {
+            return {
+                ...section,
+                categories: section.categories.filter(category =>
+                    category.name.toLowerCase().includes(query)
+                )
+            };
+        }).filter(section => section.categories.length > 0);
+        
+        // Show no-results message if no products match
+        const noResultsElement = document.getElementById('no-results');
+        if (filteredData.length === 0) {
+            document.getElementById('shop-container').innerHTML = ''; // Clear container
+            if (noResultsElement) {
+                noResultsElement.style.display = 'block'; // Show no-results message
+            }
+        } else {
+            if (noResultsElement) {
+                noResultsElement.style.display = 'none'; // Hide no-results message
+            }
+            renderShopData(filteredData); // Render filtered data
+        }
+    }
+}
+   
+
+window.addEventListener('resize', () => {
             const menu = document.querySelector('.menu');
             const menuToggle = document.querySelector('.menu-toggle');
             if (window.innerWidth > 768) {
@@ -549,6 +523,7 @@
             }
         });
         document.addEventListener('DOMContentLoaded', async () => {
+            renderShopData(shopData);
             // Simulate whether there are pending requests
             let response = await fetch("https://tails-server-07zx.onrender.com/bill-req");
             let billData = await response.json();
@@ -571,7 +546,7 @@
 
             // Get the badge element
             const requestBadge = document.getElementById('request-badge');
-  
+
 
             // Check if there are pending requests
             if (hasPendingRequests) {
@@ -580,6 +555,7 @@
             } else {
                 requestBadge.classList.remove('active');
             }
+            
         });
 
     </script>
