@@ -6,7 +6,7 @@ const cors = require('cors');
 const User = require('./models/User'); // Import the User model
 const MainModel = require('./models/Request'); // Import the User model
 const Bill = require('./models/bill');
-
+let company = require("./models/company")
 const app = express();
 
 
@@ -54,21 +54,26 @@ app.get("/", (req, res) => {
 })
 // Route to handle user login
 // Adjust path as necessary
-let company = require("./models/company")
+
 app.post('/company-login', async (req, res) => {
+  
+  
   try {
+     
   
     
     // Find the user by email
     const admin = await company.find({ email: req.body.email });
-
+    
+    
     // Check if the email exists
     if (!admin) {
       return res.status(400).json({ error: 'Invalid email' });
     }
-
+ 
+    
     // Check if the provided password matches the stored password
-    if (admin.password !== req.body.password) {
+    if (admin[0].password !== req.body.password) {
       return res.status(400).json({ error: 'Invalid password' });
     }
 
@@ -307,5 +312,5 @@ app.post('/change-password', async (req, res) => {
 });
 
 app.listen(5000, () => {
-  console.log(`Server is running on http://localhost:4000`)
+  console.log(`Server is running on http://localhost:5000`)
 })
